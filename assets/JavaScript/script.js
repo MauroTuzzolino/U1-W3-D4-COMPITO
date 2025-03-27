@@ -13,11 +13,23 @@ for (let i = 1; i <= 99; i++) {
 
 const starterButton = document.getElementById("starterButton");
 
-starterButton.addEventListener("click", function () {
-  let nRandom = Math.floor(Math.random() * allCells.length) + 1;
-  console.log("Numero generato:", nRandom);
+let numeriEstraibili = [];
+for (let i = 1; i <= 99; i++) {
+  numeriEstraibili.push(i);
+}
+//console.log(numeriEstraibili);
 
-  if (nRandom >= 0 && nRandom < allCells.length) {
-    allCells[nRandom - 1].classList.add("changeColor");
+starterButton.addEventListener("click", function () {
+  if (numeriEstraibili.length === 0) {
+    console.log("non ci sono più numeri");
+  }
+  let nRandom = Math.floor(Math.random() * numeriEstraibili.length);
+  let numeroEstratto = numeriEstraibili[nRandom];
+  //console.log("Numero generato:", numeroEstratto);
+  numeriEstraibili.splice(nRandom, 1);
+  //console.log(numeriEstraibili);
+
+  if (numeroEstratto > 0 && numeroEstratto <= allCells.length) {
+    allCells[numeroEstratto - 1].classList.add("changeColor");
   }
 });
