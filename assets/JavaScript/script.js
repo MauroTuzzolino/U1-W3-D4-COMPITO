@@ -19,17 +19,48 @@ for (let i = 1; i <= 99; i++) {
 }
 //console.log(numeriEstraibili);
 
-starterButton.addEventListener("click", function () {
+function randomNumberGenerator() {
   if (numeriEstraibili.length === 0) {
     console.log("non ci sono più numeri");
   }
   let nRandom = Math.floor(Math.random() * numeriEstraibili.length);
   let numeroEstratto = numeriEstraibili[nRandom];
-  //console.log("Numero generato:", numeroEstratto);
+  console.log("Numero generato:", numeroEstratto);
   numeriEstraibili.splice(nRandom, 1);
   //console.log(numeriEstraibili);
 
+  return numeroEstratto;
+}
+
+const formButton = document.getElementById("formButton");
+
+const areaCartelle = document.getElementById("areaCartelle");
+
+let arrayCelleCartella = [];
+
+formButton.addEventListener("click", function (e) {
+  e.preventDefault();
+  let inputNumber = document.getElementById("inputCartelle").value;
+  for (let j = 0; j < inputNumber; j++) {
+    for (let i = 1; i <= 24; i++) {
+      let cellaNumeroCartella = document.createElement("div");
+      cellaNumeroCartella.classList.add("cellaCartella");
+      cellaNumeroCartella.textContent = i;
+      areaCartelle.appendChild(cellaNumeroCartella);
+      arrayCelleCartella.push(cellaNumeroCartella);
+    }
+  }
+  //console.log(arrayCelleCartella);
+});
+
+formButton.addEventListener("click", function () {
+  areaCartelle.style.display = "grid";
+});
+
+starterButton.addEventListener("click", function () {
+  let numeroEstratto = randomNumberGenerator();
   if (numeroEstratto > 0 && numeroEstratto <= allCells.length) {
     allCells[numeroEstratto - 1].classList.add("changeColor");
+    arrayCelleCartella[numeroEstratto - 1].classList.add("changeColor");
   }
 });
